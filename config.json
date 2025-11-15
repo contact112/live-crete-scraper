@@ -74,7 +74,7 @@
   },
 
   "translation": {
-    "enabled": true,
+    "enabled": false,
     "source_languages": ["el", "en"],
     "target_language": "fr",
     "translator": "GoogleTranslator",
@@ -96,7 +96,7 @@
   },
 
   "images": {
-    "download_enabled": true,
+    "download_enabled": false,
     "download_timeout": 30,
     "max_file_size_mb": 10,
     "allowed_formats": ["jpg", "jpeg", "png", "webp"],
@@ -150,8 +150,8 @@
   },
 
   "performance": {
-    "use_multithreading": true,
-    "max_workers": 5,
+    "use_multithreading": false,
+    "max_workers": 1,
     "queue_size": 100,
     "batch_size": 20,
     "memory_limit_mb": 2048,

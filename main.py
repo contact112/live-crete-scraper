@@ -183,7 +183,19 @@ class CreteScraper:
         events = []
 
         try:
-            # Health check
+            # Initialize scrapers BEFORE health check
+            if source_type == 'Facebook':
+                if not self.facebook_scraper:
+                    if not self.selenium_manager:
+                        self.selenium_manager = SeleniumManager(self.config)
+                    self.facebook_scraper = FacebookScraper(self.selenium_manager, self.config)
+            else:
+                if not self.web_scraper:
+                    if not self.selenium_manager:
+                        self.selenium_manager = SeleniumManager(self.config)
+                    self.web_scraper = WebScraper(self.selenium_manager, self.config)
+
+            # Health check (NOW scrapers are initialized)
             if self.config.get('health_check', {}).get('enabled', True):
                 if source_type == 'Website':
                     if not self.web_scraper.health_check(source_url):
@@ -211,7 +223,7 @@ class CreteScraper:
             self.stats['sources_scraped'] += 1
 
         except Exception as e:
-            self.logger.error(f"✗ Failed to scrape {source_name}: {e}")
+            self.logger.error(f"✗ Failed to scrape {source_name}: {e}", exc_info=True)
             self.failed_sources.append({
                 'source_id': source_id,
                 'source_name': source_name,
@@ -231,13 +243,7 @@ class CreteScraper:
         Returns:
             List of events
         """
-        if not self.facebook_scraper:
-            # Initialize Facebook scraper
-            if not self.selenium_manager:
-                self.selenium_manager = SeleniumManager(self.config)
-
-            self.facebook_scraper = FacebookScraper(self.selenium_manager, self.config)
-
+        # Scraper is already initialized in scrape_source()
         return self.facebook_scraper.scrape_page_events(source['source_url'])
 
     def _scrape_web_source(self, source: Dict) -> List[Dict]:
@@ -250,13 +256,7 @@ class CreteScraper:
         Returns:
             List of events
         """
-        if not self.web_scraper:
-            # Initialize web scraper
-            if not self.selenium_manager:
-                self.selenium_manager = SeleniumManager(self.config)
-
-            self.web_scraper = WebScraper(self.selenium_manager, self.config)
-
+        # Scraper is already initialized in scrape_source()
         # Check if Selenium is required
         use_selenium = source.get('requires_selenium', '').lower() == 'yes'
 
