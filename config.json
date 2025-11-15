@@ -1,0 +1,246 @@
+{
+  "project": {
+    "name": "Live Crete Events Scraper",
+    "version": "1.0.0",
+    "description": "Ultra-performant scraper for 202 Crete event sources"
+  },
+
+  "paths": {
+    "sources_csv": "sources_config_complete.csv",
+    "output_dir": "data/output",
+    "cache_dir": "data/cache",
+    "backup_dir": "data/backups",
+    "logs_dir": "data/logs",
+    "images_dir": "images/events",
+    "cookies_dir": "cookies"
+  },
+
+  "selenium": {
+    "headless": true,
+    "browser": "chrome",
+    "window_size": [1920, 1080],
+    "page_load_timeout": 15,
+    "implicit_wait": 10,
+    "disable_images": false,
+    "disable_javascript": false,
+    "user_data_dir": null
+  },
+
+  "anti_detection": {
+    "stealth_mode": true,
+    "disable_webdriver_flag": true,
+    "random_user_agent": true,
+    "canvas_fingerprint_defense": true,
+    "webgl_fingerprint_defense": true,
+    "referer_spoofing": true,
+    "random_viewport": true
+  },
+
+  "delays": {
+    "min_delay_between_requests": 3,
+    "max_delay_between_requests": 10,
+    "min_delay_between_pages": 2,
+    "max_delay_between_pages": 5,
+    "scroll_delay": 1,
+    "facebook_login_wait": 5
+  },
+
+  "retry": {
+    "max_retries": 3,
+    "backoff_factor": 2,
+    "initial_backoff": 2,
+    "max_backoff": 60,
+    "retry_on_timeout": true,
+    "retry_on_error": true
+  },
+
+  "cache": {
+    "enabled": true,
+    "cache_type": "local",
+    "cache_ttl_hours": 24,
+    "cache_max_size_mb": 500,
+    "use_compression": true
+  },
+
+  "facebook": {
+    "email": "livecretemanager@gmail.com",
+    "password": "EVIMERIA1983!",
+    "login_url": "https://www.facebook.com/login",
+    "save_cookies": true,
+    "cookies_file": "cookies/facebook_cookies.pkl",
+    "scroll_pause_time": 2,
+    "max_scroll_attempts": 10,
+    "infinite_scroll": true
+  },
+
+  "translation": {
+    "enabled": true,
+    "source_languages": ["el", "en"],
+    "target_language": "fr",
+    "translator": "GoogleTranslator",
+    "fallback_translator": "MyMemoryTranslator",
+    "auto_detect_language": true,
+    "batch_size": 10,
+    "fields_to_translate": [
+      "title",
+      "subtitle",
+      "description",
+      "excerpt",
+      "venue_name",
+      "venue_address",
+      "venue_city",
+      "organizer_name",
+      "category",
+      "tags"
+    ]
+  },
+
+  "images": {
+    "download_enabled": true,
+    "download_timeout": 30,
+    "max_file_size_mb": 10,
+    "allowed_formats": ["jpg", "jpeg", "png", "webp"],
+    "convert_to_jpg": true,
+    "quality": 85,
+    "sizes": {
+      "full": [1200, 800],
+      "medium": [600, 400],
+      "thumbnail": [300, 200]
+    },
+    "priority_sources": [
+      "og:image",
+      "twitter:image",
+      "schema.org image",
+      "facebook event image",
+      "first large image"
+    ]
+  },
+
+  "geocoding": {
+    "enabled": true,
+    "provider": "nominatim",
+    "nominatim_user_agent": "live-crete-scraper/1.0",
+    "fallback_provider": "google",
+    "google_api_key": null,
+    "cache_coordinates": true,
+    "default_country": "Greece"
+  },
+
+  "data_quality": {
+    "validate_dates": true,
+    "validate_urls": true,
+    "validate_emails": true,
+    "clean_html": true,
+    "remove_duplicates": true,
+    "duplicate_threshold": 0.85,
+    "min_title_length": 5,
+    "max_title_length": 200,
+    "min_description_length": 10
+  },
+
+  "export": {
+    "format": "csv",
+    "encoding": "utf-8",
+    "separator": ",",
+    "include_header": true,
+    "timestamp_format": "%Y-%m-%d %H:%M:%S",
+    "output_filename": "crete_events_{timestamp}.csv",
+    "backup_raw_data": true,
+    "compress_backups": true
+  },
+
+  "performance": {
+    "use_multithreading": true,
+    "max_workers": 5,
+    "queue_size": 100,
+    "batch_size": 20,
+    "memory_limit_mb": 2048,
+    "enable_profiling": false
+  },
+
+  "logging": {
+    "level": "INFO",
+    "console_output": true,
+    "file_output": true,
+    "log_filename": "scraper_{date}.log",
+    "max_log_size_mb": 50,
+    "backup_count": 5,
+    "log_format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    "date_format": "%Y-%m-%d %H:%M:%S"
+  },
+
+  "health_check": {
+    "enabled": true,
+    "timeout": 5,
+    "verify_ssl": true,
+    "skip_failed_sources": true,
+    "report_dead_sources": true
+  },
+
+  "wordpress": {
+    "site_url": "https://your-wordpress-site.com",
+    "username": "",
+    "password": "",
+    "api_endpoint": "/wp-json/wp/v2",
+    "media_endpoint": "/wp-json/wp/v2/media",
+    "events_endpoint": "/wp-json/tribe/events/v1/events",
+    "verify_ssl": true,
+    "upload_images": true,
+    "create_categories": true,
+    "create_tags": true,
+    "default_status": "publish"
+  },
+
+  "user_agents": [
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.1 Safari/605.1.15",
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36 Edg/119.0.0.0",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:120.0) Gecko/20100101 Firefox/120.0",
+    "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:121.0) Gecko/20100101 Firefox/121.0",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (X11; Linux x86_64; rv:120.0) Gecko/20100101 Firefox/120.0",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:119.0) Gecko/20100101 Firefox/119.0",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:121.0) Gecko/20100101 Firefox/121.0",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Safari/605.1.15",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (X11; Linux x86_64; rv:119.0) Gecko/20100101 Firefox/119.0",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:120.0) Gecko/20100101 Firefox/120.0",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:118.0) Gecko/20100101 Firefox/118.0",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:120.0) Gecko/20100101 Firefox/120.0",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.5 Safari/605.1.15",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:117.0) Gecko/20100101 Firefox/117.0",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:119.0) Gecko/20100101 Firefox/119.0",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (X11; Linux x86_64; rv:118.0) Gecko/20100101 Firefox/118.0",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.4 Safari/605.1.15",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:116.0) Gecko/20100101 Firefox/116.0",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:119.0) Gecko/20100101 Firefox/119.0",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:118.0) Gecko/20100101 Firefox/118.0",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:115.0) Gecko/20100101 Firefox/115.0",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.3 Safari/605.1.15",
+    "Mozilla/5.0 (X11; Linux x86_64; rv:117.0) Gecko/20100101 Firefox/117.0"
+  ]
+}

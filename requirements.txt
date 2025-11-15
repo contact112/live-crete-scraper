@@ -1,0 +1,82 @@
+# Core Selenium and Browser Automation
+selenium==4.15.2
+undetected-chromedriver==3.5.4
+webdriver-manager==4.0.1
+
+# Web Scraping
+beautifulsoup4==4.12.2
+lxml==4.9.3
+html5lib==1.1
+requests==2.31.0
+urllib3==2.1.0
+
+# Data Processing
+pandas==2.1.4
+numpy==1.26.2
+
+# Translation
+deep-translator==1.11.4
+langdetect==1.0.9
+
+# Image Processing
+Pillow==10.1.0
+
+# Geocoding
+geopy==2.4.1
+
+# User Agent Rotation
+fake-useragent==1.4.0
+
+# Date/Time Processing
+python-dateutil==2.8.2
+pytz==2023.3
+
+# Data Validation
+validators==0.22.0
+
+# Text Similarity (for deduplication)
+python-Levenshtein==0.23.0
+fuzzywuzzy==0.18.0
+
+# Logging
+colorlog==6.8.0
+
+# Configuration
+python-dotenv==1.0.0
+
+# Cache
+diskcache==5.6.3
+
+# WordPress Integration (optional)
+python-wordpress-xmlrpc==2.3
+
+# Async/Threading
+aiohttp==3.9.1
+asyncio==3.4.3
+
+# Progress Bar
+tqdm==4.66.1
+
+# System Utilities
+psutil==5.9.6
+
+# HTTP Headers Spoofing
+httpx==0.25.2
+
+# JSON Processing
+ujson==5.9.0
+
+# Charset Detection
+chardet==5.2.0
+
+# HTML Cleaning
+bleach==6.1.0
+
+# Slugify
+python-slugify==8.0.1
+
+# Retry Logic
+tenacity==8.2.3
+
+# CSV Processing
+csvkit==1.5.0
